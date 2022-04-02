@@ -1,6 +1,10 @@
 package youareell;
 
 import controllers.*;
+import models.Id;
+import views.IdTextView;
+
+import java.util.List;
 
 public class YouAreEll {
 
@@ -20,13 +24,22 @@ public class YouAreEll {
         System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
     }
 
+    public String MakeURLCall(String infoType, String command, String filter) {
+        return "";
+    }
+
     public String get_ids() {
-        return tt.makecall("/ids", "GET", "");
+        List<Id> ids = tt.getIds();
+        String display = "";
+        for (Id i:ids) {
+            IdTextView idView = new IdTextView(i);
+            display+= idView.toString();
+        }
+        return display;
+//        return tt.makecall("/ids", "GET", "");
     }
 
     public String get_messages() {
         return MakeURLCall("/messages", "GET", "");
     }
-
-
 }

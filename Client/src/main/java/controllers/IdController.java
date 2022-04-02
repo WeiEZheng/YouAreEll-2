@@ -11,7 +11,7 @@ public class IdController {
     Id myId;
 
     public ArrayList<Id> getIds() {
-        return null;
+        return new ArrayList<Id>(allIds.values());
     }
 
     public Id postId(Id id) {
@@ -25,5 +25,4 @@ public class IdController {
     public Id putId(Id id) {
         return null;
     }
- 
 }
