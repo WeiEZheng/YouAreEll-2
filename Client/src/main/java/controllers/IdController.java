@@ -1,9 +1,10 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import models.Id;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class IdController {
     private HashMap<String, Id> allIds;
@@ -11,7 +12,8 @@ public class IdController {
     Id myId;
 
     public ArrayList<Id> getIds() {
-        return new ArrayList<Id>(allIds.values());
+        ServerController serverController = ServerController.shared();
+        return new ArrayList<Id>(Arrays.asList(serverController.idGet()));
     }
 
     public Id postId(Id id) {
