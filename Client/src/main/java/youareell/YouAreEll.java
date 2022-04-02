@@ -14,6 +14,10 @@ public class YouAreEll {
         this.tt = t;
     }
 
+    public YouAreEll(MessageController messageController, IdController idController) {
+        tt = new TransactionController(messageController, idController);
+    }
+
     public static void main(String[] args) {
         // hmm: is this Dependency Injection?
         YouAreEll urlhandler = new YouAreEll(
@@ -25,6 +29,12 @@ public class YouAreEll {
     }
 
     public String MakeURLCall(String infoType, String command, String filter) {
+        if (command.equals("GET")) {
+            if (infoType.equals("/ids"))
+                return get_ids();
+            else if (infoType.equals("/messages"))
+                return get_messages();
+        }
         return "";
     }
 
