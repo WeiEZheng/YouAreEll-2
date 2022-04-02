@@ -3,7 +3,6 @@ package controllers;
 import models.Id;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class IdController {
@@ -13,7 +12,7 @@ public class IdController {
 
     public ArrayList<Id> getIds() {
         ServerController serverController = ServerController.shared();
-        return new ArrayList<Id>(Arrays.asList(serverController.idGet()));
+        return (ArrayList<Id>) serverController.idGet();
     }
 
     public Id postId(Id id) {

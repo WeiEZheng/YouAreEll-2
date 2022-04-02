@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerController {
     HttpURLConnection connection;
@@ -25,8 +27,8 @@ public class ServerController {
 
     public JSONArray serverCall(String infoType, String command){
         BufferedReader reader = null;
-//        String line;
-//        StringBuilder response = new StringBuilder();
+        String line;
+        StringBuilder response = new StringBuilder();
         try {
             URL url = new URL(rootURL+infoType);
             connection = (HttpURLConnection) url.openConnection();
@@ -36,33 +38,34 @@ public class ServerController {
             int status = connection.getResponseCode();
             if (status >= 300){
                 reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-//                while ((line = reader.readLine())!=null){
-//                    response.append(line);
-//                }
-//                reader.close();
+                while ((line = reader.readLine())!=null){
+                    response.append(line);
+                }
+                reader.close();
             } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//                while ((line = reader.readLine())!=null){
-//                    response.append(line);
-//                }
-//                reader.close();
+                while ((line = reader.readLine())!=null){
+                    response.append(line);
+                }
+                reader.close();
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new JSONArray(reader);
+        return new JSONArray(response.toString());
     }
 
-    public Id[] idGet(){
+    public List<Id> idGet(){
         ObjectMapper objectMapper = new ObjectMapper();
-        Id[] ids = new Id[0];
+        List<Id> ids = new ArrayList<>();
         try {
-            ids = objectMapper.readValue(idGet().toString(), new TypeReference<Id[]>(){});
+            ids = objectMapper.readValue(serverCall("/ids","GET").toString(), new TypeReference<List<Id>>(){});
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        System.out.println(serverCall("/ids","GET").toString());
         return ids;
     }
 //    public JsonString idPost(Id id) {

@@ -25,7 +25,7 @@ public class YouAreEll {
                 new MessageController(), new IdController()
         ));
         System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
-        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
+//        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
     }
 
     public String MakeURLCall(String infoType, String command, String filter) {
