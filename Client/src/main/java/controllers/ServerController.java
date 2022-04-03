@@ -50,28 +50,4 @@ public class ServerController {
         }
         return new JSONArray(response.toString());
     }
-
-//    public List<Id> idGet(){
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        List<Id> ids = new ArrayList<>();
-//        try {
-//            ids = objectMapper.readValue(MakeURLCall("/ids","GET").toString(), new TypeReference<List<Id>>(){});
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(MakeURLCall("/ids","GET").toString());
-//        return ids;
-//    } moved to id controller
-//    public JsonString idPost(Id id) {
-//        // url -> /ids/
-//        // create json from Id
-//        // request
-//        // reply
-//        // return json
-//    }
-//    public JsonString idPut(Id id) {
-//        // url -> /ids/
-//    }
 }
-
-// ServerController.shared.doGet()

@@ -23,7 +23,7 @@ public class IdController {
             e.printStackTrace();
         }
         for (Id i : ids){
-            allIds.put(i.getUid(),i);
+            allIds.put(i.getUserid(),i);
         }
         return ids;
     }

@@ -12,19 +12,21 @@ import java.util.HashSet;
 public class MessageController {
 
     private HashSet<Message> messagesSeen = new HashSet<>();
-    // why a HashSet??
+    private ServerController serverController = ServerController.shared();
 
-    public ArrayList<Message> getMessages() {
-        ServerController serverController = ServerController.shared();
+    public MessageController(){
         ObjectMapper objectMapper = new ObjectMapper();
-        ArrayList<Message> messages = new ArrayList<>();
         try {
-            messages = objectMapper.readValue(serverController.MakeURLCall("/messages","GET").toString(), new TypeReference<>(){});
+            messagesSeen = objectMapper.readValue(serverController.MakeURLCall("/messages","GET").toString(), new TypeReference<>(){});
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        for (Message i : messages){
-            messagesSeen.add(i);
+    }
+
+    public ArrayList<Message> getMessages() {
+        ArrayList<Message> messages = new ArrayList<>();
+        for (Message i : messagesSeen){
+            messages.add(i);
         }
         return messages;
     }
