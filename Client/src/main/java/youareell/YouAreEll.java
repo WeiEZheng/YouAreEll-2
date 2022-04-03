@@ -10,7 +10,7 @@ import java.util.List;
 
 public class YouAreEll {
 
-    TransactionController tt;
+    static TransactionController tt;
 
     public YouAreEll (TransactionController t) {
         this.tt = t;
@@ -28,6 +28,7 @@ public class YouAreEll {
         ));
         System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
         System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
+        tt.postId("Wei Zheng", "WeiEZheng");
     }
 
     public String MakeURLCall(String infoType, String command, String filter) {
