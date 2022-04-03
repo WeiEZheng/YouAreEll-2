@@ -2,7 +2,9 @@ package youareell;
 
 import controllers.*;
 import models.Id;
+import models.Message;
 import views.IdTextView;
+import views.MessageTextView;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class YouAreEll {
                 new MessageController(), new IdController()
         ));
         System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
-//        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
+        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
     }
 
     public String MakeURLCall(String infoType, String command, String filter) {
@@ -43,13 +45,18 @@ public class YouAreEll {
         String display = "";
         for (Id i:ids) {
             IdTextView idView = new IdTextView(i);
-            display+= idView.toString();
+            display+= idView +"\n";
         }
         return display;
-//        return tt.makecall("/ids", "GET", "");
     }
 
     public String get_messages() {
-        return MakeURLCall("/messages", "GET", "");
+        List<Message> messages = tt.getMessages();
+        String display = "";
+        for (Message i:messages) {
+            MessageTextView messageTextView = new MessageTextView();
+            display+= messageTextView.toString(i) +"\n";
+        }
+        return display;
     }
 }

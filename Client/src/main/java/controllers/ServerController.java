@@ -1,9 +1,5 @@
 package controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import models.Id;
 import org.json.JSONArray;
 
 import java.io.BufferedReader;
@@ -12,8 +8,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ServerController {
     HttpURLConnection connection;
@@ -25,8 +19,8 @@ public class ServerController {
         return svr;
     }
 
-    public JSONArray serverCall(String infoType, String command){
-        BufferedReader reader = null;
+    public JSONArray MakeURLCall(String infoType, String command){
+        BufferedReader reader;
         String line;
         StringBuilder response = new StringBuilder();
         try {
@@ -57,17 +51,17 @@ public class ServerController {
         return new JSONArray(response.toString());
     }
 
-    public List<Id> idGet(){
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Id> ids = new ArrayList<>();
-        try {
-            ids = objectMapper.readValue(serverCall("/ids","GET").toString(), new TypeReference<List<Id>>(){});
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        System.out.println(serverCall("/ids","GET").toString());
-        return ids;
-    }
+//    public List<Id> idGet(){
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        List<Id> ids = new ArrayList<>();
+//        try {
+//            ids = objectMapper.readValue(MakeURLCall("/ids","GET").toString(), new TypeReference<List<Id>>(){});
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(MakeURLCall("/ids","GET").toString());
+//        return ids;
+//    } moved to id controller
 //    public JsonString idPost(Id id) {
 //        // url -> /ids/
 //        // create json from Id
