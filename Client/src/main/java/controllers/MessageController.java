@@ -8,7 +8,6 @@ import models.Message;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 public class MessageController {
 
@@ -18,30 +17,45 @@ public class MessageController {
     public ArrayList<Message> getMessages() {
         ServerController serverController = ServerController.shared();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Message> messages = new ArrayList<>();
+        ArrayList<Message> messages = new ArrayList<>();
         try {
-            messages = objectMapper.readValue(serverController.MakeURLCall("/messages","GET").toString(), new TypeReference<List<Message>>(){});
+            messages = objectMapper.readValue(serverController.MakeURLCall("/messages","GET").toString(), new TypeReference<>(){});
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         for (Message i : messages){
             messagesSeen.add(i);
         }
-        return (ArrayList<Message>) messages;
+        return messages;
     }
 
     public ArrayList<Message> getMessagesForId(Id Id) {
-        return null;
+        ArrayList <Message> messages = new ArrayList<>();
+        for (Message m :messagesSeen){
+            if (m.getFromId().equals(Id.getGithub()))
+                messages.add(m);
+        }
+        return messages;
     }
+
     public Message getMessageForSequence(String seq) {
+        for (Message m :messagesSeen){
+            if (m.getSeqId().equals(seq))
+                return m;
+        }
         return null;
     }
+
     public ArrayList<Message> getMessagesFromFriend(Id myId, Id friendId) {
-        return null;
+        ArrayList <Message> messages = new ArrayList<>();
+        for (Message m :messagesSeen){
+            if (m.getFromId().equals(friendId.getGithub()) && m.getToId().equals(myId.getGithub()))
+                messages.add(m);
+        }
+        return messages;
     }
 
     public Message postMessage(Id myId, Id toId, Message msg) {
         return null;
     }
- 
 }

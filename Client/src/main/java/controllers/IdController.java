@@ -7,19 +7,18 @@ import models.Id;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class IdController {
     private HashMap<String, Id> allIds = new HashMap<>();
 
     Id myId;
 
-    public List<Id> getIds() {
+    public ArrayList<Id> getIds() {
         ServerController serverController = ServerController.shared();
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Id> ids = new ArrayList<>();
+        ArrayList<Id> ids = new ArrayList<>();
         try {
-            ids = objectMapper.readValue(serverController.MakeURLCall("/ids","GET").toString(), new TypeReference<List<Id>>(){});
+            ids = objectMapper.readValue(serverController.MakeURLCall("/ids","GET").toString(), new TypeReference<>(){});
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
