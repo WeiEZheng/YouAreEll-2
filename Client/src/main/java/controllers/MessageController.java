@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Id;
 import models.Message;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,7 +58,20 @@ public class MessageController {
         return messages;
     }
 
-    public Message postMessage(Id myId, Id toId, Message msg) {
-        return null;
+    public Message postMessage(Message msg) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = "";
+        try {
+            jsonString = objectMapper.writeValueAsString(msg);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        JSONArray jsonArray = serverController.MakeURLCall("/ids/WeiEZheng/messages", "POST", jsonString);
+        try {
+            msg =objectMapper.readValue(jsonArray.getJSONObject(0).toString(), Message.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return msg;
     }
 }

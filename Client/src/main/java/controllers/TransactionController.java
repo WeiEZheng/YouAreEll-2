@@ -30,4 +30,10 @@ public class TransactionController {
         tid = idCtrl.postId(tid);
         return ("Id registered.");
     }
+
+    public String postMessage(String message, String fromId, String toId) {
+        Message messageToSent =  new Message(message, fromId, toId);
+        messageToSent = msgCtrl.postMessage(messageToSent);
+        return ("Message sent.");
+    }
 }
