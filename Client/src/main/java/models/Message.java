@@ -23,7 +23,6 @@ public class Message implements Comparable {
     private String toId = "";
     @JsonProperty("fromid")
     private String fromId = "";
-    @JsonIgnore
     private String timestamp = "";
     @JsonProperty("sequence")
     private String seqId = "";
@@ -74,11 +73,11 @@ public class Message implements Comparable {
     public void setFromId(String fromId) {
         this.fromId = fromId;
     }
-
+    @JsonIgnore
     public String getTimestamp() {
         return timestamp;
     }
-
+    @JsonProperty
     public void setTimestamp(String timestamp){this.timestamp=timestamp;}
 
     public String getSeqId() {

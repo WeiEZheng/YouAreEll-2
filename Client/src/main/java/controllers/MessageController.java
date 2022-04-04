@@ -16,6 +16,10 @@ public class MessageController {
     private ServerController serverController = ServerController.shared();
 
     public MessageController(){
+        this.update();
+    }
+
+    public void update(){
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             messagesSeen = objectMapper.readValue(serverController.MakeURLCall("/messages","GET").toString(), new TypeReference<>(){});

@@ -15,6 +15,10 @@ public class IdController {
     Id myId;
 
     public IdController(){
+        this.update();
+    }
+
+    public void update(){
         ObjectMapper objectMapper = new ObjectMapper();
         ArrayList<Id> ids = new ArrayList<>();
         try {

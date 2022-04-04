@@ -27,9 +27,9 @@ public class YouAreEll {
                 new MessageController(), new IdController()
         ));
 //        tt.postId("Wei Zheng", "WeiEZheng");
-        System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
-//        System.out.println(tt.postMessage("Hello Server", "Wei","-"));
-        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
+//        System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
+//        System.out.println(tt.postMessage("test1", "","WeiEZheng"));
+//        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
     }
 
     public String MakeURLCall(String infoType, String command, String filter) {
