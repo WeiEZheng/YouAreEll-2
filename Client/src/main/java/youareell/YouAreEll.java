@@ -28,18 +28,8 @@ public class YouAreEll {
         ));
 //        tt.postId("Wei Zheng", "WeiEZheng");
 //        System.out.println(urlhandler.MakeURLCall("/ids", "GET", ""));
-//        System.out.println(tt.postMessage("test1", "","WeiEZheng"));
+//        System.out.println(tt.postMessage("test1", "WeiEZheng",""));
 //        System.out.println(urlhandler.MakeURLCall("/messages", "GET", ""));
-    }
-
-    public String MakeURLCall(String infoType, String command, String filter) {
-        if (command.equals("GET")) {
-            if (infoType.equals("/ids"))
-                return get_ids();
-            else if (infoType.equals("/messages"))
-                return get_messages();
-        }
-        return "";
     }
 
     public String get_ids() {
@@ -60,5 +50,13 @@ public class YouAreEll {
             display+= messageTextView.toString(i) +"\n";
         }
         return display;
+    }
+
+    public String postID(String name, String githubID){
+        return tt.postId(name, githubID);
+    }
+
+    public String postMessage(String message, String fromID, String toID){
+        return tt.postMessage(message,fromID,toID);
     }
 }

@@ -21,6 +21,7 @@ public class ServerController {
     public JSONArray MakeURLCall(String infoType, String command){
         return  MakeURLCall(infoType,command, null);
     }
+
     public JSONArray MakeURLCall(String infoType, String command, String jsonString){
         BufferedReader reader;
         String line;

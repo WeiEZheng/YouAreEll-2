@@ -32,8 +32,12 @@ public class TransactionController {
     }
 
     public String postMessage(String message, String fromId, String toId) {
+        if (fromId==null) {
+            System.out.println("FormId cannot be blank");
+            return null;
+        }
         Message messageToSent =  new Message(message, fromId, toId);
-        messageToSent = msgCtrl.postMessage(messageToSent);
+        messageToSent = msgCtrl.postMessage(messageToSent, fromId);
         return ("Message sent.");
     }
 }

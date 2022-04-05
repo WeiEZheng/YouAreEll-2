@@ -62,7 +62,7 @@ public class MessageController {
         return messages;
     }
 
-    public Message postMessage(Message msg) {
+    public Message postMessage(Message msg, String githubId) {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = "";
         try {
@@ -70,11 +70,17 @@ public class MessageController {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        JSONArray jsonArray = serverController.MakeURLCall("/ids/WeiEZheng/messages", "POST", jsonString);
-        try {
-            msg =objectMapper.readValue(jsonArray.getJSONObject(0).toString(), Message.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        JSONArray jsonArray = serverController.MakeURLCall("/ids/"+githubId+"/messages", "POST", jsonString);
+        if (jsonArray.toString().contains("[{\"error\":")) {
+            msg = null;
+            System.out.println(jsonArray);
+        }
+        else {
+            try {
+                msg = objectMapper.readValue(jsonArray.getJSONObject(0).toString(), Message.class);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
         return msg;
     }
