@@ -14,9 +14,7 @@ public class IdController {
     private ServerController serverController = ServerController.shared();
     Id myId;
 
-    public IdController(){
-        this.update();
-    }
+    public IdController(){}
 
     public void update(){
         ObjectMapper objectMapper = new ObjectMapper();
@@ -32,6 +30,7 @@ public class IdController {
     }
 
     public ArrayList<Id> getIds() {
+        update();
         ArrayList<Id> ids = new ArrayList<>(allIds.values());
         return ids;
     }
@@ -45,10 +44,15 @@ public class IdController {
             e.printStackTrace();
         }
         JSONArray jsonArray = serverController.MakeURLCall("/ids", "POST", jsonString);
-        try {
-            id =objectMapper.readValue(jsonArray.getJSONObject(0).toString(), Id.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        if (jsonArray.toString().contains("[{\"error\":")) {
+            id = null;
+            System.out.println(jsonArray);
+        } else {
+            try {
+                id = objectMapper.readValue(jsonArray.getJSONObject(0).toString(), Id.class);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
         return id;
     }

@@ -28,7 +28,10 @@ public class TransactionController {
     public String postId(String idtoRegister, String githubName) {
         Id tid = new Id(idtoRegister, githubName);
         tid = idCtrl.postId(tid);
-        return ("Id registered.");
+        if (tid != null)
+            return ("Id registered.");
+        else
+            return ("Id not registered");
     }
 
     public String postMessage(String message, String fromId, String toId) {
@@ -38,6 +41,9 @@ public class TransactionController {
         }
         Message messageToSent =  new Message(message, fromId, toId);
         messageToSent = msgCtrl.postMessage(messageToSent, fromId);
-        return ("Message sent.");
+        if (messageToSent!=null)
+            return ("Message sent.");
+        else
+            return ("Message not sent");
     }
 }

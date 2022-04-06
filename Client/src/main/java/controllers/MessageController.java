@@ -15,9 +15,7 @@ public class MessageController {
     private HashSet<Message> messagesSeen = new HashSet<>();
     private ServerController serverController = ServerController.shared();
 
-    public MessageController(){
-        this.update();
-    }
+    public MessageController(){}
 
     public void update(){
         ObjectMapper objectMapper = new ObjectMapper();
@@ -29,6 +27,7 @@ public class MessageController {
     }
 
     public ArrayList<Message> getMessages() {
+        update();
         ArrayList<Message> messages = new ArrayList<>();
         for (Message i : messagesSeen){
             messages.add(i);
@@ -37,6 +36,7 @@ public class MessageController {
     }
 
     public ArrayList<Message> getMessagesForId(Id Id) {
+        update();
         ArrayList <Message> messages = new ArrayList<>();
         for (Message m :messagesSeen){
             if (m.getFromId().equals(Id.getGithub()))
@@ -46,6 +46,7 @@ public class MessageController {
     }
 
     public Message getMessageForSequence(String seq) {
+        update();
         for (Message m :messagesSeen){
             if (m.getSeqId().equals(seq))
                 return m;
@@ -54,6 +55,7 @@ public class MessageController {
     }
 
     public ArrayList<Message> getMessagesFromFriend(Id myId, Id friendId) {
+        update();
         ArrayList <Message> messages = new ArrayList<>();
         for (Message m :messagesSeen){
             if (m.getFromId().equals(friendId.getGithub()) && m.getToId().equals(myId.getGithub()))
